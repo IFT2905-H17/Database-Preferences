@@ -35,10 +35,39 @@ public class TouTV {
     }
 
     public static Lineup[] getLineups(String type) throws IOException, JSONException {
-        ArrayList<Lineup> list = new ArrayList<>();
 
-        // TODO : construire un tableau d'objets Lineup à partir du JSON
 
-        return null;
+        JSONObject json = getJSON();
+
+        JSONArray categories = json.getJSONArray("Lineups");
+
+        JSONObject category = null;
+
+        for(int i=0; i<categories.length(); i++) {
+            category = categories.getJSONObject(i);
+
+            if(categories.getJSONObject(i).getString("Title").equals(type)) {
+                break;
+            }
+        }
+
+        JSONArray jsonLineups = category.getJSONArray("LineupItems");
+
+        Lineup[] lineups = new Lineup[jsonLineups.length()];
+
+        for(int i=0; i<jsonLineups.length(); i++) {
+
+            JSONObject lineup = jsonLineups.getJSONObject(i);
+
+            lineups[i] = new Lineup(
+                    lineup.getString("Title"),
+                    lineup.getString("Description"),
+                    lineup.getString("ImageUrl"),
+                    lineup.getJSONObject("Share").getString("AbsoluteUrl"),
+                    lineup.getJSONObject("Details").getString("Description")
+            );
+        }
+
+        return lineups;
     }
 }
