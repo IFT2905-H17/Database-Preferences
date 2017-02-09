@@ -28,6 +28,8 @@ public class LineupsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lineups);
 
+        type = getIntent().getExtras().getString("type");
+
         list = (ListView) findViewById(R.id.lineups);
 
         LineupFetcher fetcher = new LineupFetcher();
