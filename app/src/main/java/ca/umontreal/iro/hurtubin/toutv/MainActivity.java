@@ -3,8 +3,11 @@ package ca.umontreal.iro.hurtubin.toutv;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -61,5 +64,25 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.main, menu);
+
+        MenuItem about = menu.findItem(R.id.about);
+
+        about.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+
+                Toast.makeText(MainActivity.this, "Cette application a été créée pour des fins pédagogies seulement. Veuillez l'utiliser pour des fins pédagogiques seulement.", Toast.LENGTH_SHORT).show();
+
+                return true;
+            }
+        });
+
+        return true;
     }
 }
