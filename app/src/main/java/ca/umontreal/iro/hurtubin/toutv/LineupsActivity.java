@@ -1,11 +1,14 @@
 package ca.umontreal.iro.hurtubin.toutv;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -71,7 +74,7 @@ public class LineupsActivity extends AppCompatActivity {
 
                 @Override
                 public long getItemId(int position) {
-                    return 0;
+                    return position;
                 }
 
                 @Override
@@ -95,6 +98,18 @@ public class LineupsActivity extends AppCompatActivity {
                 }
             });
 
+            list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Intent intent = new Intent(getApplicationContext(), LineupActivity.class);
+
+                    intent.putExtra("type", type);
+                    intent.putExtra("first_lineup_id", id);
+                    Log.i("GU", String.valueOf(id));
+
+                    startActivity(intent);
+                }
+            });
         }
     }
 }
