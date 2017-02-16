@@ -1,5 +1,6 @@
 package ca.umontreal.iro.hurtubin.toutv;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -7,6 +8,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.style.BulletSpan;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -22,6 +24,7 @@ import java.io.IOException;
 public class LineupsPagerActivity extends AppCompatActivity {
 
     private String type = "Documentaires";
+    private int startPosition;
 
     ViewPager pager;
 
@@ -29,6 +32,11 @@ public class LineupsPagerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lineups_pager);
+
+        Bundle args = getIntent().getExtras();
+
+        type = args.getString("type");
+        startPosition = args.getInt("position");
 
         pager = (ViewPager) findViewById(R.id.pager);
 
@@ -81,6 +89,8 @@ public class LineupsPagerActivity extends AppCompatActivity {
                     return fragment;
                 }
             });
+
+            pager.setCurrentItem(startPosition);
         }
     }
 }
