@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/TouTV.iml" filepath="$PROJECT_DIR$/TouTV.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TouTV-Pager-Preferences.iml" filepath="$PROJECT_DIR$/TouTV-Pager-Preferences.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
