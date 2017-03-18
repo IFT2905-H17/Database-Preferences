@@ -1,13 +1,26 @@
 package ca.umontreal.iro.hurtubin.toutv;
 
 import android.content.Intent;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.ListFragment;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.StringBuilderPrinter;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -16,54 +29,57 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button films = (Button) findViewById(R.id.films);
-        Button emissions = (Button) findViewById(R.id.emissions);
-        Button documentaires = (Button) findViewById(R.id.documentaires);
-        Button episodes = (Button) findViewById(R.id.episodes);
+        TabLayout tabs = (TabLayout) findViewById(R.id.tabLayout);
+        ViewPager pager = (ViewPager) findViewById(R.id.viewPager);
 
-        films.setOnClickListener(new View.OnClickListener() {
+        pager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), LineupsActivity.class);
+            public Fragment getItem(int position) {
 
-                intent.putExtra("type", "Films");
+                if(position == 0)
+                    return new ButtonsFragment();
 
-                startActivity(intent);
+                ListFragment f = new ListFragment();
+
+                ArrayList<String> items = new ArrayList<String>();
+
+                items.add("Rangée 1");
+                items.add("Rangée 2");
+                items.add("Rangée 3");
+
+                items.add("Test");
+                items.add("...");
+
+                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
+                        getApplicationContext(),
+                        android.R.layout.simple_list_item_1,
+                        android.R.id.text1,
+                        items
+                );
+
+                f.setListAdapter(arrayAdapter);
+
+                return f;
+            }
+
+            @Override
+            public int getCount() {
+                return 2;
+            }
+
+            private String[] titles = new String[]{
+                    "Films",
+                    "Liste"
+            };
+
+            @Override
+            public CharSequence getPageTitle(int position) {
+
+                return titles[position];
             }
         });
 
-        emissions.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), LineupsActivity.class);
-
-                intent.putExtra("type", "Émissions");
-
-                startActivity(intent);
-            }
-        });
-
-        documentaires.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), LineupsActivity.class);
-
-                intent.putExtra("type", "Documentaires");
-
-                startActivity(intent);
-            }
-        });
-
-        episodes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), LineupsActivity.class);
-
-                intent.putExtra("type", "Épisodes");
-
-                startActivity(intent);
-            }
-        });
+        tabs.setupWithViewPager(pager);
     }
 
     @Override
