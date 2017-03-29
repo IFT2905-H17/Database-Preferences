@@ -38,4 +38,18 @@
         android:layout_height="wrap_content"
         android:id="@+id/episodes"
         android:layout_weight="1" />
+
+    <Button
+        android:text="Favorits"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/favorites"
+        android:layout_weight="1" />
+
+    <Button
+        android:text="Preferences"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/preferences"
+        android:layout_weight="1" />
 </LinearLayout>

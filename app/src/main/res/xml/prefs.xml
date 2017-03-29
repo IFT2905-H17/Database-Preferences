@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="Preference category">
+
+        <EditTextPreference
+            android:defaultValue="Default value"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="Votre nom"
+            android:key="nom" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:title="Voulez-vous cocher cette case ?"
+            android:key="cocher" />
+    </PreferenceCategory>
+</PreferenceScreen>
